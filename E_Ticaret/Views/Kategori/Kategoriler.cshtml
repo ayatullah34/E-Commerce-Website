@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@model IEnumerable<E_Ticaret.Models.Kategori>
+
+<section class="panel">
+    <header class="panel-heading">
+        Kategoriler
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            <div class="clearfix">
+                <div class="btn-group">
+
+                    @if (User.IsInRole("A"))
+                    {
+                        <a href="/Kategori/KategoriEkle" class="btn btn-success">
+                            Yeni Kategori <i class="icon-plus"></i>
+                        </a>
+
+                    }
+                    else
+                    {
+                        <a href="#" class="btn btn-success">
+                            Yeni Kategori ekleme yetkiniz yoktur.
+                        </a>
+                    }
+                </div>
+
+
+            </div>
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Kategori Adı</th>
+                        <th>Açıklama</th>
+
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var kategori in Model)
+                    {
+                    <tr class="">
+                        <td>@kategori.Adi</td>
+                        <td>@kategori.Aciklama</td>
+
+                        @if (User.IsInRole("A"))
+                        {
+
+                            <td>
+                                <a class="edit" href="/Kategori/KategoriGuncelle/@kategori.Id">
+                                    <i class="icon-pencil"></i>
+
+                                </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="/Kategori/KategoriSil/@kategori.Id">
+                                    <i class="icon-trash"></i>
+
+                                </a>
+                            </td>
+
+                        }
+
+                        else
+                        {
+                            <td>
+                                <a class="edit" href="#">
+                                    Kategori güncelleme yetkiniz yoktur.
+
+                                </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="#">
+                                    Kategori silme yetkiniz yoktur.
+
+                                </a>
+                            </td>
+                        }
+
+                       
+                    </tr>
+                    }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+

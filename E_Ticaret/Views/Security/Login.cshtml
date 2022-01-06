@@ -1,0 +1,69 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+@model E_Ticaret.Models.User
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/Content/assets2/images/required/ico/favicon.ico">
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Content/assets2/images/required/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Content/assets2/images/required/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Content/assets2/images/required/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/Content/assets2/images/required/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/Content/assets2/images/required/ico/favicon.png">
+
+    <title>@ViewBag.Title</title>
+
+    <!-- Required CSS Files -->
+    <link type="text/css" href="/Content/assets2/css/required/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link type="text/css" href="/Content/assets2/js/required/jquery-ui-1.11.0.custom/jquery-ui.min.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/js/required/jquery-ui-1.11.0.custom/jquery-ui.structure.min.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/js/required/jquery-ui-1.11.0.custom/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/css/required/mCustomScrollbar/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/css/required/icheck/all.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/fonts/metrize-icons/styles-metrize-icons.css" rel="stylesheet">
+
+    <!-- Optional JS Files -->
+    <link type="text/css" href="/Content/assets2/css/optional/jqvmap/jqvmap.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/css/optional/jqvmap/circloid-jqvmap.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/css/optional/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/css/optional/fullcalendar/circloid-fullcalendar.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/css/optional/fullcalendar/fullcalendar.print.css" rel="stylesheet" media="print" />
+    <!-- add CSS files here -->
+    <!-- More Required CSS Files -->
+    <link type="text/css" href="/Content/assets2/css/styles-core.css" rel="stylesheet" />
+    <link type="text/css" href="/Content/assets2/css/styles-core-responsive.css" rel="stylesheet" />
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/Content/assets2/js/required/misc/ie10-viewport-bug-workaround.js"></script>
+
+</head>
+<body>
+    <div class="block-content-outer">
+        <div class="block-content-inner">
+            @ViewBag.mesaj
+            <form action="/Security/Login" method="post" role="form">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.KullaniciAdi)
+                    @Html.TextBoxFor(m => m.KullaniciAdi, new { @class = "form-control", placeholder = "Kullanıcı Adı" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Parola);
+                    @Html.PasswordFor(m => m.Parola, new { @class = "form-control", placeholder = "Şifre" })
+                </div>
+                <button type="submit" class="btn btn-block btn-success">Giriş Yap</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using E_Ticaret.Models
+@model List<Musteri>
+@section head{
+    <style>
+        .hata {
+            color: red;
+        }
+    </style>
+}
+@section body{
+    <!-- Modal small-modal -->
+    <div class="modal fade small-modal" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="small-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" data-border-top="multi">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="small-modal-label">Müşteri sil</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="mesaj"></p>
+                    <p class="hata"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-danger tedSil">Evet</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                    Müşteri İşlemleri
+                </div>
+
+                @if (User.IsInRole("A"))
+                {
+
+                    <div class="block-controls">
+                        <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                        <a href="/Musteri/Ekle" class="btn btn-success rounded">Yeni Müşteri Ekle</a>
+                    </div>
+
+                }
+
+                else
+                {
+                    <div class="block-controls">
+                        <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                        <a href="#" class="btn btn-success rounded">Yeni Müşteri ekleme yetkiniz yoktur.</a>
+                    </div>
+                }
+            </div>
+            <div class="block-content-outer">
+                <div class="block-content-inner">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+
+                                <th>Müşteri Adı</th>
+                                <th>Müşteri Adresi</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>Email</th>
+                                <th>Telefon</th>
+                                <th>Güncelle</th>
+                                <th>Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Musteri item in Model)
+                            {
+                            <tr>
+                                <td>@item.Adi</td>
+                                <td>@item.Soyadi</td>
+                                <td>@item.KullaniciAdi</td>
+                                <td>@item.Email</td>
+                                <td>@item.Telefon</td>
+
+                                @if (User.IsInRole("A"))
+                                {
+                                    <td><a href="/Musteri/Guncelle/@item.Id" class="btn btn-primary"> Güncelle </a></td>
+                                    <td><button class="btn btn-danger modalAc" data-toggle="modal" data-target="#small-modal" data-tedid="@item.Id" data-sirket="@item.Adi"> Sil</button></td>
+
+                                }
+                                else
+                                {
+                                    <td><a href="#" class="btn btn-primary"> Güncelle yetkiniz yoktur. </a></td>
+                                    <td><button class="btn btn-danger" > Silme yetkiniz yoktur. </button></td>
+                                }
+
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/Content/Admin/assets/js/jquery-1.11.1.min.js"></script>
+    <script>
+        $(".modalAc").click(function () {
+            $(".modal-body>p.hata").html("");
+            var adi = $(this).data("Adi");
+            $(".modal-body>p.mesaj").html(adi + "isimli müsteri silinsin mi");
+            var id = $(this).data("tedid");
+            $(".tedSil").data("tedid", id);
+        });
+        $(".tedSil").click(function () {
+            var id = $(this).data("tedid");
+            $.ajax({
+                type: "POST",
+                url: "/Musteri/Sil/" + id,
+                success: function (durum) {
+                    if (durum == 1) {
+                        window.location.replace("/Musteri/Index");
+                    }
+                    else {
+                        $(".modal-body>p.hata").html("Silme anında hata oluştu");
+                    }
+
+                }
+
+
+            });
+        });
+
+    </script>
+
+}

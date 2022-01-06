@@ -1,0 +1,95 @@
+﻿
+@using E_Ticaret.Models
+@model E_Ticaret.Models.Urun
+
+
+@{
+    ViewBag.Title = "UrunGuncelle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label>Ad</label>
+                    <input type="text" name="Adi" class="form-control" value="@Model.Adi" />
+
+                </div>
+
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <input type="text" name="Aciklama" class="form-control" value="@Model.Aciklama" />
+
+                </div>
+
+                <div class="form-group">
+                    <label>Önceki Resim</label>
+                    @if (ViewBag.resim != null)
+                    {
+                        foreach (Resim r in ViewBag.resim)
+                        {
+
+                            <img src="@r.BuyukYol" width="90" height="60" />
+                            <br>
+                        }
+                    }
+
+
+
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Resims", new { @class = "control-label col-md-2" })
+                    <input type="file" name="file" />
+
+
+
+                </div>
+
+                <div class="form-group">
+                    <label>Değiştirilmek istenen resim</label>
+                    <input type="text" name="resimId" class="form-control" value="0" />
+
+                </div>
+
+                <div class="form-group">
+                    <label>Alış Fiyat</label>
+                    <input type="text" name="AlisFiyat" class="form-control" value="@Model.AlisFiyat" />
+
+                </div>
+
+                <div class="form-group">
+                    <label>Satış Fiyat</label>
+                    <input type="text" name="SatisFiyat" class="form-control" value="@Model.SatisFiyat" />
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>Kategori</label>
+                    @Html.DropDownListFor(x => x.KategoriID, (List<SelectListItem>)ViewBag.ktgr, new { @class = "form-control" })
+
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Güncelle</button>
+                <a href="/Urun/Urunler">Ürün Listesi</a>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

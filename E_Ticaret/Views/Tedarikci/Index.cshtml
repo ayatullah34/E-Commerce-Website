@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using E_Ticaret.Models
+@model List<Tedarikci>
+
+@section head{
+
+    <style>
+        .hata {
+            color: red;
+        }
+    </style>
+}
+
+@section body{
+
+    <!-- Modal small-modal -->
+    <div class="modal fade small-modal" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="small-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" data-border-top="multi">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="small-modal-label">tedarikçi sil</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="mesaj"></p>
+                    <p class="hata"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-danger tedSil">Evet</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                    Tedarikçi İşlemleri
+                </div>
+                <div class="block-controls">
+                    <span aria-hidden="true" class="icon icon-arrow-down icon-size-medium block-control-collapse"></span>
+                    <a href="/Tedarikci/Ekle" class="btn btn-success rounded">Yeni Tedarikçi Ekle</a>
+                </div>
+            </div>
+            <div class="block-content-outer">
+                <div class="block-content-inner">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Şirket Adı</th>
+                                <th>Müşteri Adı</th>
+                                <th>Müşteri Ünvanı</th>
+                                <th>Adres</th>
+                                <th>Ülke</th>
+                                <th>Güncelle</th>
+                                <th>Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Tedarikci item in Model)
+                            {
+                            <tr>
+                                <td>@item.SirketAdi</td>
+                                <td>@item.MusteriAdi</td>
+                                <td>@item.MusteriUnvani</td>
+                                <td>@item.Adres</td>
+                                <td>@item.Ulke</td>
+                                <td><a href="/Tedarikci/Guncelle/@item.TedarikciID" class="btn btn-primary"> Güncelle </a></td>
+                                <td><button class="btn btn-danger modalAc" data-toggle="modal" data-target="#small-modal" data-tedid="@item.TedarikciID" data-sirket="@item.SirketAdi"> Sil</button></td>
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/Content/assets2/js/required/jquery-1.11.1.min.js"></script>
+    <script>
+        $(".modalAc").click(function () {
+            $(".modal-body>p.hata").html("");
+            var sirketadi = $(this).data("sirket");
+            $(".modal-body>p.mesaj").html(sirketadi + "isimli sirket silinsin mi");
+            var id = $(this).data("tedid");
+            $(".tedSil").data("tedid", id);
+        });
+        $(".tedSil").click(function () {
+            var id = $(this).data("tedid");
+            $.ajax({
+                type: "POST",
+                url: "/Tedarikci/Sil/" + id,
+                success: function (durum) {
+                    if (durum == 1) {
+                        window.location.replace("/Tedarikci/Index");
+                    }
+                    else {
+                        $(".modal-body>p.hata").html("Silme anında hata oluştu");
+                    }
+
+                }
+
+
+            });
+        });
+
+    </script>
+
+}
+

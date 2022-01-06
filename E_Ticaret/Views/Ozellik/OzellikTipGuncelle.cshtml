@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "OzellikTipGuncelle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using E_Ticaret.Models
+@model E_Ticaret.Models.OzellikTip
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label>Ad</label>
+                    <input type="text" name="Adi" class="form-control" value="@Model.Adi" />
+
+                </div>
+
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <input type="text" name="Aciklama" class="form-control" value="@Model.Aciklama" />
+
+                </div>
+         
+                
+                <div class="form-group">
+                    <label>Kategori</label>
+                    @Html.DropDownListFor(x => x.KategoriID, (List<SelectListItem>)ViewBag.ktgr, new { @class = "form-control" })
+
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Güncelle</button>
+                <a href="/Ozellik/OzellikTipleri">Özellik Tip Listesi</a>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

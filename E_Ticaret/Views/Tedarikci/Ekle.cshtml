@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using E_Ticaret.Models
+@model Tedarikci
+
+<br />
+<br />
+<br />
+
+<br />
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                    Tedarikci İşlemleri
+                </div>
+               
+            </div>
+            <div class="block-content-outer">
+                <div class="block-content-inner">
+                    <form action="/Tedarikci/Ekle" method="post" role="form">
+                        @if (Model != null)
+                        {
+                            <input type="hidden" name="KategoriId" value="@Model.TedarikciID" />
+                        }
+                        <div class="form-group">
+
+                            <label>Şirket Adı</label>
+
+                            @if (Model.SirketAdi == null)
+                            {
+                                <input value="" class="form-control" type="text" name="SirketAdi" placeholder="Şirket adı giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.SirketAdi" class="form-control" type="text" name="SirketAdi" placeholder="Şirket adı giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Müşteri Adı</label>
+
+                            @if (Model.MusteriAdi == null)
+                            {
+                                <input value="" class="form-control" type="text" name="MusteriAdi" placeholder="Müşteri adı giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.MusteriAdi" class="form-control" type="text" name="MusteriAdi" placeholder="Müşteri adı giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Müşteri Unvanı</label>
+
+                            @if (Model.MusteriUnvani == null)
+                            {
+                                <input value="" class="form-control" type="text" name="MusteriUnvani" placeholder="Müşteri unvanı giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.MusteriUnvani" class="form-control" type="text" name="MusteriUnvani" placeholder="Müşteri unvanı giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Adres</label>
+
+                            @if (Model.Adres == null)
+                            {
+                                <input value="" class="form-control" type="text" name="Adres" placeholder="Adres giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.Adres" class="form-control" type="text" name="Adres" placeholder="Adres giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Ülke</label>
+
+                            @if (Model.Ulke == null)
+                            {
+                                <input value="" class="form-control" type="text" name="Ulke" placeholder="Ülke giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.Ulke" class="form-control" type="text" name="Ulke" placeholder="Ülke giriniz" />
+                            }
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

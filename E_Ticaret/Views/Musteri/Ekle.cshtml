@@ -1,0 +1,114 @@
+﻿
+
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using E_Ticaret.Models
+@model Musteri
+
+<br />
+<br />
+<br />
+
+<br />
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="block">
+            <div class="block-heading">
+                <div class="main-text h2">
+                    Müşteri İşlemleri
+                </div>
+
+            </div>
+            <div class="block-content-outer">
+                <div class="block-content-inner">
+                    <form action="/Musteri/Ekle" method="post" role="form">
+                        @if (Model != null)
+                        {
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                        }
+                        <div class="form-group">
+
+                            <label>Müşteri Adı</label>
+
+                            @if (Model.Adi == null)
+                            {
+                                <input value="" class="form-control" type="text" name="Adi" placeholder="Müşteri adı giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.Adi" class="form-control" type="text" name="Adi" placeholder="Müşteri adı giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Müşteri Soyadı</label>
+
+                            @if (Model.Soyadi == null)
+                            {
+                                <input value="" class="form-control" type="text" name="Soyadi" placeholder="Müşteri soyadı giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.Soyadi" class="form-control" type="text" name="Soyadi" placeholder="Müşteri soyadı giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Müşteri Kullanıcı Adı</label>
+
+                            @if (Model.KullaniciAdi == null)
+                            {
+                                <input value="" class="form-control" type="text" name="KullaniciAdi" placeholder="Kullanıcı adı giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.KullaniciAdi" class="form-control" type="text" name="KullaniciAdi" placeholder="Kullanıcı adı giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Email</label>
+
+                            @if (Model.Email== null)
+                            {
+                                <input value="" class="form-control" type="text" name="Email" placeholder="Email giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.Email" class="form-control" type="text" name="Email" placeholder="Email giriniz" />
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Telefon</label>
+
+                            @if (Model.Telefon == null)
+                            {
+                                <input value="" class="form-control" type="text" name="Telefon" placeholder="Telefon giriniz" />
+                            }
+                            else
+                            {
+                                <input value="@Model.Telefon" class="form-control" type="text" name="Telefon" placeholder="Telefon giriniz" />
+                            }
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
